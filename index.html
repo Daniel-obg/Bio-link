@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Leite | Soluções Digitais</title>
+    <style>
+        /* 1. VARIÁVEIS DE DESIGN (Padrão Profissional) */
+        :root {
+            --cor-primaria: #FF8C00;   /* Laranja Goku */
+            --cor-secundaria: #FFD700; /* Dourado Super Saiyajin */
+            --cor-sucesso: #25d366;    /* Verde WhatsApp */
+            --fundo-escuro: #0a0a0a;
+            --vidro: rgba(255, 255, 255, 0.05);
+        }
+
+        /* 2. ESTRUTURA BASE */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--fundo-escuro);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* 3. FUNDO MATRIX (ENERGIA) */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Melhor prática: valor negativo para fundo */
+            opacity: 0.6;
+        }
+
+        /* 4. CARTÃO EMPRESARIAL (GLASSMORPHISM) */
+        .card-pro {
+            width: 90%;
+            max-width: 420px;
+            background: var(--vidro);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 24px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        /* 5. PERFIL & AURA */
+        .perfil-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .foto-perfil {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid var(--cor-primaria);
+            object-fit: cover;
+            animation: aura-glow 2s infinite alternate;
+            box-shadow: 0 0 20px var(--cor-primaria);
+        }
+
+        @keyframes aura-glow {
+            from { box-shadow: 0 0 15px var(--cor-secundaria); }
+            to { box-shadow: 0 0 30px var(--cor-primaria); filter: brightness(1.1); }
+        }
+
+        .nome-empresa {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin: 10px 0 5px 0;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, var(--cor-secundaria), var(--cor-primaria));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cargo {
+            font-size: 0.85rem;
+            color: #a0a0a0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        /* 6. COMPONENTES VISUAIS (BANNER) */
+        .featured-banner {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            transition: transform 0.4s ease;
+        }
+
+        .featured-banner:hover {
+            transform: scale(1.02);
+        }
+
+        /* 7. BOTÃO DE CONVERSÃO (CTA) */
+        .cta-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--cor-sucesso);
+            color: #000;
+            text-decoration: none;
+            padding: 18px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+            filter: saturate(1.2);
+        }
+
+        .footer-tag {
+            margin-top: 25px;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="matrix-canvas"></canvas>
+
+    <main class="card-pro">
+        <header>
+            <div class="perfil-wrapper">
+                <img src="https://i.supaimg.com/c055d155-ba74-4bed-8815-307c7ec9834a/5050825f-2334-4704-ba82-7f7c1faf9729.jpg" class="foto-perfil" alt="Daniel Leite">
+            </div>
+            <h1 class="nome-empresa">@DanielLeite</h1>
+            <p class="cargo">Desenvolvedor de Elite & Criador</p>
+        </header>
+
+        <section>
+            <img src="https://i.supaimg.com/c055d155-ba74-4bed-8815-307c7ec9834a/b11c9b03-85c7-4b1b-8066-46c5113b73d7.jpg" class="featured-banner" alt="Banner Institucional">
+        </section>
+
+        <footer>
+            <a href="https://wa.me/5500999999999" target="_blank" class="cta-button">
+                SOLICITAR ORÇAMENTO VIA WHATSAPP
+            </a>
+            <p class="footer-tag">Nível de Poder Académico: +8000</p>
+        </footer>
+    </main>
+
+    <script>
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.onresize = resize;
+        resize();
+
+        const symbols = "★☆0123456789Z";
+        const fontSize = 16;
+        const columns = Math.floor(canvas.width / fontSize);
+        const drops = Array(columns).fill(1);
+
+        function draw() {
+            ctx.fillStyle = "rgba(10, 10, 10, 0.1)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = symbols.charAt(Math.floor(Math.random() * symbols.length));
+                ctx.fillStyle = i % 3 === 0 ? "#FF8C00" : "#FFD700";
+                ctx.font = fontSize + "px monospace";
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.98) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 50);
+    </script>
+</body>
+</html>
