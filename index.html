@@ -149,7 +149,7 @@
         </header>
 
         <section>
-            <img src="https://i.supaimg.com/c055d155-ba74-4bed-8815-307c7ec9834a/b11c9b03-85c7-4b1b-8066-46c5113b73d7.jpg" class="featured-banner" alt="Banner Institucional">
+            <img src="https://i.supaimg.com/c055d155-ba74-4bed-8815-307c7ec9834a/c8987857-7572-4d74-a627-9d31fbd9d146.png" class="featured-banner" alt="Banner Institucional">
         </section>
 
         <footer>
@@ -177,11 +177,13 @@
         const drops = Array(columns).fill(1);
 
         function draw() {
+            // Fundo semitransparente para criar o rastro dos caracteres
             ctx.fillStyle = "rgba(10, 10, 10, 0.1)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             for (let i = 0; i < drops.length; i++) {
                 const text = symbols.charAt(Math.floor(Math.random() * symbols.length));
+                // Alterna cores entre Laranja e Dourado
                 ctx.fillStyle = i % 3 === 0 ? "#FF8C00" : "#FFD700";
                 ctx.font = fontSize + "px monospace";
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
